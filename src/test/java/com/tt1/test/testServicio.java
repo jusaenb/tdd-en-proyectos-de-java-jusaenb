@@ -1,50 +1,35 @@
 package com.tt1.test;
 
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class testServicio {
+class ServicioTest {
 
-    private Repositorio repo;
-    private MailerStub mailer;
-    private Servicio servicio;
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+	}
 
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+	}
 
-    @Before
-    public void setUp() {
+	@BeforeEach
+	void setUp() throws Exception {
+	}
 
-    }
+	@AfterEach
+	void tearDown() throws Exception {
+	}
 
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
 
-    @After
-    public void tearDown() {
-
-    }
-
-    @Test
-    public void testCrearToDo() {
-
-    }
-
-    @Test
-    public void testAgregarEmail() {
-
-    }
-
-    @Test
-    public void testMarcarToDoCompletado() {
-
-    }
-
-    @Test
-    public void testListarToDosPendientes() {
-
-    }
-
-    @Test
-    public void testEnviarAlertas() {
-
-    }
 }
+
