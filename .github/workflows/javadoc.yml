@@ -1,28 +1,35 @@
-name: javadoc
+name: Javadoc
+
 on:
   push:
-    branches: [main, stable] 
-
-permissions:
-  contents: write
+    branches:
+      - stable
 
 jobs:
-  build:
+  generate-javadoc:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Generate
-        run: |
-          javadoc -d docs -sourcepath src/main/java -subpackages . -encoding UTF-8 -charset UTF-8 -docencoding UTF-8
-          touch docs/.nojekyll
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: docs
-          branch: gh-pages
-          
 
+    steps:
+    # Paso 1: Checkout del código fuente
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Paso 2: Configurar Java (asegúrate de usar la versión adecuada de Java)
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+
+    # Paso 3: Generar Javadoc
+    - name: Generate Javadoc
+      run: |
+        mkdir javadoc
+        javadoc -d javadoc -sourcepath src/main/java $(find src/main/java -name "*.java")
+
+    # Paso 4: Publicar Javadoc en GitHub Pages
+    - name: Publish Javadoc to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        personal_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./javadoc
+        publish_branch: gh-pages
