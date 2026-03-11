@@ -1,31 +1,26 @@
 name: Javadoc
-
 on:
   push:
     branches:
       - stable
-
 jobs:
   generate-javadoc:
     runs-on: ubuntu-latest
-
     steps:
     # Paso 1: Checkout del código fuente
     - name: Checkout code
       uses: actions/checkout@v3
-
     # Paso 2: Configurar Java (asegúrate de usar la versión adecuada de Java)
     - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:
-        java-version: '11'
-
-    # Paso 3: Generar Javadoc
+          java-version: '11'
+          distribution: ''
+        # Paso 3: Generar Javadoc
     - name: Generate Javadoc
       run: |
         mkdir javadoc
         javadoc -d javadoc -sourcepath src/main/java $(find src/main/java -name "*.java")
-
     # Paso 4: Publicar Javadoc en GitHub Pages
     - name: Publish Javadoc to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
